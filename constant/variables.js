@@ -1,3 +1,5 @@
+const BulkUpload = require("../services/BulkUpload");
+
 const userdefaultPath="/userLogin";
 const userloginPath=userdefaultPath+'/:userName/:userPassword';
 
@@ -102,10 +104,12 @@ const PaySlipDefaultPath='/payslip';
 const EmployeeReport='/Report/Employee';
 const EmployeepayrollReport='/Report/PayRoll';
 const EmployeeVarrianceReport="/Report/Varriance"
+const EmployeeVarrianceindvReport="/Report/indevVarriance";
 //#endregion 
 //#region BulkUpload
 const BulkUploadPath='/bulkupload';
 const FileUpload='/Upload';
+const PostBulkUploadPath=BulkUploadPath+"/data";
 //#endregion
 const message={
 	"success":"Operation successfull",
@@ -126,6 +130,12 @@ const ReversePayroll=PaySlipDefaultPath+"/reversePayroll"
 const specificPayroll=PaySlipDefaultPath+"/specific/:Company";
 const changeStatuspayroll=PaySlipDefaultPath+"/status/:status/:code"
 //#endregion
+
+//#region taxable Element
+const taxabledefaultPath="/taxable";
+const taxableByCompany=defaultPath+"/ByCompany";
+const taxableSecondaryPath=defaultPath+"/:Id"
+//#endregion
 module.exports={userloginPath,userdefaultPath,message,defaultPath,BankSecondaryPath,CompanydefaultPath,CompanySelectivePath,CompanySecondaryPath,
 				CostCenterdefaultPath,CostCenterSecondaryPath,CostCenterByCompany,ExchangedefaultPath,ExchangeSecondaryPath,
 				ExchangeByCurrency,BankAccdefaultPath,BankAccSecondaryPath,BankAccByEmployee,EmployeedefaultPath,
@@ -136,7 +146,8 @@ module.exports={userloginPath,userdefaultPath,message,defaultPath,BankSecondaryP
 				SocialSecuritydefaultPath,SocialSecuritySecondaryPath,SocialSecurityByCompany,
 				UnitdefaultPath,UnitSecondaryPath,UnitByCompany,UnpaidleavesdefaultPath,UnpaidleavesSecondaryPath,UnpaidleavesByCompany,
 				userProtectiondefaultPath,userProtectionSecondaryPath,userProtectionByCompany,LookupsSecondaryPath,
-				CountryLawdefaultPath,CountryLawSecondaryPath,PaySlipDefaultPath,EmployeeReport,EmployeepayrollReport,EmployeeVarrianceReport,
-				BulkUploadPath,FileUpload,DashboardPath,CompaniesCountPath,UsersCountPath,
+				CountryLawdefaultPath,CountryLawSecondaryPath,PaySlipDefaultPath,EmployeeReport,EmployeepayrollReport,EmployeeVarrianceReport,EmployeeVarrianceindvReport,
+				BulkUploadPath,FileUpload,PostBulkUploadPath,DashboardPath,CompaniesCountPath,UsersCountPath,
 				TerminationPrimaryPath,TerminationSecondaryPath,
-				EmployeeAdvanceDetail,oneTimePayRoll,EmployeeSelective,ReversePayroll,specificPayroll,changeStatuspayroll};
+				EmployeeAdvanceDetail,oneTimePayRoll,EmployeeSelective,ReversePayroll,specificPayroll,changeStatuspayroll,
+				taxableByCompany,taxableSecondaryPath,taxabledefaultPath};
