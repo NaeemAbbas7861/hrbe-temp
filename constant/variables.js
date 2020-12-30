@@ -99,6 +99,7 @@ const CountryLawSecondaryPath='/countrylaw/:Id';
 //#endregion
 //#region 
 const PaySlipDefaultPath='/payslip';
+const payrollbyCompany=PaySlipDefaultPath +"/ByCompany/:CompanyId";
 //#endregion
 //#region Reports
 const EmployeeReport='/Report/Employee';
@@ -125,10 +126,12 @@ const UsersCountPath="/dashboard/users/Count"
 //#region Termination
 const TerminationPrimaryPath="/termination";
 const TerminationSecondaryPath=TerminationPrimaryPath+"/:Id";
+const TerminationByCompany=TerminationPrimaryPath+"/ByCompany/:CompanyId"
 
 const ReversePayroll=PaySlipDefaultPath+"/reversePayroll"
 const specificPayroll=PaySlipDefaultPath+"/specific/:Company";
 const changeStatuspayroll=PaySlipDefaultPath+"/status/:status/:code"
+
 //#endregion
 
 //#region taxable Element
@@ -148,6 +151,6 @@ module.exports={userloginPath,userdefaultPath,message,defaultPath,BankSecondaryP
 				userProtectiondefaultPath,userProtectionSecondaryPath,userProtectionByCompany,LookupsSecondaryPath,
 				CountryLawdefaultPath,CountryLawSecondaryPath,PaySlipDefaultPath,EmployeeReport,EmployeepayrollReport,EmployeeVarrianceReport,EmployeeVarrianceindvReport,
 				BulkUploadPath,FileUpload,PostBulkUploadPath,DashboardPath,CompaniesCountPath,UsersCountPath,
-				TerminationPrimaryPath,TerminationSecondaryPath,
-				EmployeeAdvanceDetail,oneTimePayRoll,EmployeeSelective,ReversePayroll,specificPayroll,changeStatuspayroll,
+				TerminationPrimaryPath,TerminationSecondaryPath,TerminationByCompany,
+				EmployeeAdvanceDetail,oneTimePayRoll,EmployeeSelective,ReversePayroll,specificPayroll,payrollbyCompany,changeStatuspayroll,
 				taxableByCompany,taxableSecondaryPath,taxabledefaultPath};

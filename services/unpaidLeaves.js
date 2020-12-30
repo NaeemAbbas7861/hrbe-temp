@@ -11,7 +11,9 @@ const GetAllunpaidLeaves = async (req, res) => {
 		const result = await pool.request()
 			.query(query, function (err, profileset) {
 				if (err) {
-					console.log(err)
+					res.status(500)
+					res.send(message.error)
+					return "error";
 				}
 				else {
 					var response ={data:profileset.recordset};
@@ -29,12 +31,16 @@ const GetAllunpaidLeaves = async (req, res) => {
 const GetunpaidLeavesByCompany = async (req, res) => {
 	try {
 		
-		var query = "select * from  unpaidLeaves where CompanyId = '"+req.params.Id+"' ;";
+		var query = `select unpaidLeaves.Id, employee.FirstName,company.CompanyName,unpaidLeaves.CompanyId, unpaidLeaves.EmployeeId, format(unpaidLeaves.LeaveStartDate,'dd/MM/yyyy') as LeaveStartDate , format(unpaidLeaves.LeaveEndDate,'dd/MM/yyyy') as LeaveEndDate from  unpaidLeaves 
+		inner join [dbo].[Company] company on unpaidLeaves.CompanyId=company.Id
+		inner join [dbo].[Employees] employee on unpaidLeaves.EmployeeId=employee.Id where company.Id = '`+req.params.CompanyId+`' ;`;
 		const pool = await poolPromise
 		const result = await pool.request()
 			.query(query, function (err, profileset) {
 				if (err) {
-					console.log(err)
+					res.status(500)
+		res.send(message.error)
+		return "error";
 				}
 				else {
 					var response = profileset.recordset;
@@ -56,7 +62,9 @@ const GetunpaidLeavesById = async (req, res) => {
 		const result = await pool.request()
 			.query(query, function (err, profileset) {
 				if (err) {
-					console.log(err)
+					res.status(500)
+					res.send(message.error)
+					return "error";
 				}
 				else {
 					var response = profileset.recordset;
@@ -79,7 +87,9 @@ const InsertunpaidLeaves = async (req, res) => {
 		const result = await pool.request()
 			.query(query, function (err, profileset) {
 				if (err) {
-					console.log(err)
+					res.status(500)
+					res.send(message.error)
+					return "error";
 				}
 				else {
 					var response = profileset.recordset;
@@ -101,7 +111,9 @@ const UpdateunpaidLeaves = async (req, res) => {
 		const result = await pool.request()
 			.query(query, function (err, profileset) {
 				if (err) {
-					console.log(err)
+					res.status(500)
+					res.send(message.error)
+					return "error";
 				}
 				else {
 					var response = profileset.recordset;
@@ -123,7 +135,9 @@ const DeleteunpaidLeaves= async (req, res) => {
 		const result = await pool.request()
 			.query(query, function (err, profileset) {
 				if (err) {
-					console.log(err)
+					res.status(500)
+					res.send(message.error)
+					return "error";
 				}
 				else {
 					var response = profileset.recordset;

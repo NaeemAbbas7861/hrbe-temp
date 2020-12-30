@@ -1,7 +1,7 @@
 const sql = require('mssql')  
 const config = {  
-user: 'myuser',  
-password: '_688xwsU',  
+user:'myuser',  
+password:'_688xwsU',  
 server: "kuicksave.com",  
 database: "kuicksav_hrms"  ,
 

@@ -15,7 +15,9 @@ const GetEmployeesSelective = async (req, res) => {
 		const result = await pool.request()
 			.query(query, function (err, profileset) {
 				if (err) {
-					console.log(err)
+					res.status(500)
+		res.send(message.error)
+		return "error";
 				}
 				else {
 					var response = profileset.recordset;
@@ -62,12 +64,22 @@ const GetEmployees = async (req, res) => {
 }
 const GetEmployeesByCompany = async (req, res) => {
 	try {
-		var query = "select * from  Employees where nullif('" + req.params.CompanyId + "' ,'0') is null OR CompanyId = '" + req.params.CompanyId + "' ;";
+		var query = `select 
+		Id, CompanyId, EmployeeCode, InsuranceId, TaxationId, Cnic, FirstName, 
+		LastName, format(DOB,'dd/MM/yyyy') as DOB , format(HireDate,'dd/MM/yyyy') as HireDate ,
+		 HiringReason, format(ServiceStartDate,'dd/MM/yyyy') as ServiceStartDate ,
+		format(ProbationEndDate,'dd/MM/yyyy') as ProbationEndDate,PartTimePercentage,format(ContractEndDate,'dd/MM/yyyy') as ContractEndDate,
+		PositionId, GradeId, Address, Contact,Gender, MaritalStatus, ContractType, Country,
+		CurrentEmployeeStatus,PartTimeSituation, Title, Email
+		from 
+		[dbo].[Employees] where  CompanyId = '` + req.params.CompanyId + `' ;`;
 		const pool = await poolPromise
 		const result = await pool.request()
 			.query(query, function (err, profileset) {
 				if (err) {
-					console.log(err)
+					res.status(500)
+		res.send(message.error)
+		return "error";
 				}
 				else {
 					var response = { data: profileset.recordset };
@@ -90,7 +102,9 @@ const GetEmployeePayRoll = async (req, res) => {
 		const result = await pool.request()
 			.query(query, function (err, profileset) {
 				if (err) {
-					console.log(err)
+					res.status(500)
+		res.send(message.error)
+		return "error";
 				}
 				else {
 					var response = profileset.recordset;
@@ -113,7 +127,9 @@ const GetEmployeeoneTimePayRoll = async (req, res) => {
 		const result = await pool.request()
 			.query(query, function (err, profileset) {
 				if (err) {
-					console.log(err)
+					res.status(500)
+		res.send(message.error)
+		return "error";
 				}
 				else {
 					var response = profileset.recordset;
@@ -136,7 +152,9 @@ const getEmployeeApplcableLaws = async (req, res) => {
 		const result = await pool.request()
 			.query(query, function (err, profileset) {
 				if (err) {
-					console.log(err)
+					res.status(500)
+		res.send(message.error)
+		return "error";
 				}
 				else {
 					var response = profileset.recordset;
@@ -159,7 +177,9 @@ const GetEmployeeById = async (req, res) => {
 		const result = await pool.request()
 			.query(query, function (err, profileset) {
 				if (err) {
-					console.log(err)
+					res.status(500)
+		res.send(message.error)
+		return "error";
 				}
 				else {
 					var response = profileset.recordset;
@@ -339,7 +359,9 @@ const GetEmployeeAdvanceDetail = async (req, res) => {
 		const result = await pool.request()
 			.query(query, function (err, profileset) {
 				if (err) {
-					console.log(err)
+					res.status(500)
+		res.send(message.error)
+		return "error";
 				}
 				else {
 					var response = profileset.recordsets;
