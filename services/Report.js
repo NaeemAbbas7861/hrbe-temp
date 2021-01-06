@@ -1,6 +1,7 @@
 
 const { message } = require('../constant/variables');
-const { poolPromise } = require('../config/db');
+const { sql, poolPromise } = require('../config/db');
+const { MAX } = require('mssql');
 
 const GetEmployeeReport = async (req, res) => {
 	try {
@@ -67,7 +68,9 @@ const GetEmployeePayrollReport = async (req, res) => {
 		const result = await pool.request()
 			.query(query, function (err, profileset) {
 				if (err) {
-					console.log(err)
+					res.status(500)
+					res.send(message.error)
+					return "error";
 				}
 				else {
 					var response = { data: profileset.recordset };
@@ -143,9 +146,6 @@ DROP TABLE #LastMonth
 		return "error";
 	}
 }
-
-
-
 const getIndvVarriancereport = async (req, res) => {
 	console.log(req.body)
 	try {
@@ -190,7 +190,9 @@ const getIndvVarriancereport = async (req, res) => {
 		const result = await pool.request()
 			.query(query, function (err, profileset) {
 				if (err) {
-					console.log(err)
+					res.status(500)
+		res.send(message.error)
+		return "error";
 				}
 				else {
 					var response = profileset.recordset;
@@ -204,4 +206,21 @@ const getIndvVarriancereport = async (req, res) => {
 		return "error";
 	}
 }
-module.exports = { GetEmployeeReport, GetEmployeePayrollReport, GetEmployeeVarrianceReport ,getIndvVarriancereport};
+
+const GetGTNReport = async (req, res) => {
+	try {
+		const pool = await poolPromise
+		const result = await pool.request()
+			.input("CompanyId", sql.VarChar(MAX), req.body.CompanyId)
+			.input("Date", sql.Date, req.body.Date)
+			.execute("[dbo].[GTNReport]").then(function (recordSet) {
+			
+					res.send(recordSet);
+			})
+	} catch (err) {
+		res.status(400).json({ message: err.message })
+		res.send(err.message)
+		// return "error";
+	}
+}
+module.exports = { GetEmployeeReport, GetEmployeePayrollReport, GetEmployeeVarrianceReport ,getIndvVarriancereport,GetGTNReport};
