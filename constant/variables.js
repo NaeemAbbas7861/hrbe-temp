@@ -96,6 +96,7 @@ const LookupsSecondaryPath="/lookups/:Id";
 //#region country Law
 const CountryLawdefaultPath='/countrylaw';
 const CountryLawSecondaryPath='/countrylaw/:Id';
+const CountryLawByCompanyPath=CountryLawdefaultPath+"/ByCompany/:CompanyId"
 //#endregion
 //#region 
 const PaySlipDefaultPath='/payslip';
@@ -134,6 +135,12 @@ const specificPayroll=PaySlipDefaultPath+"/specific/:Company";
 const changeStatuspayroll=PaySlipDefaultPath+"/status/:status/:code"
 
 //#endregion
+//#region Applicable Law
+const ApplicablelawdefaultPath="/CompanyApplicableLaw";
+const ApplicableLawSecondaryPath =ApplicablelawdefaultPath+"/:Id";
+const ApplicableLawByCompany=ApplicablelawdefaultPath+"/ByCompany/:CompanyId";
+
+//#endregion
 
 //#region taxable Element
 const taxabledefaultPath="/taxable";
@@ -150,8 +157,9 @@ module.exports={userloginPath,userdefaultPath,message,defaultPath,BankSecondaryP
 				SocialSecuritydefaultPath,SocialSecuritySecondaryPath,SocialSecurityByCompany,
 				UnitdefaultPath,UnitSecondaryPath,UnitByCompany,UnpaidleavesdefaultPath,UnpaidleavesSecondaryPath,UnpaidleavesByCompany,
 				userProtectiondefaultPath,userProtectionSecondaryPath,userProtectionByCompany,LookupsSecondaryPath,
-				CountryLawdefaultPath,CountryLawSecondaryPath,PaySlipDefaultPath,EmployeeReport,EmployeepayrollReport,EmployeeVarrianceReport,EmployeeVarrianceindvReport,
+				CountryLawdefaultPath,CountryLawSecondaryPath,CountryLawByCompanyPath,PaySlipDefaultPath,EmployeeReport,EmployeepayrollReport,EmployeeVarrianceReport,EmployeeVarrianceindvReport,
 				BulkUploadPath,FileUpload,PostBulkUploadPath,DashboardPath,CompaniesCountPath,UsersCountPath,
 				TerminationPrimaryPath,TerminationSecondaryPath,TerminationByCompany,
 				EmployeeAdvanceDetail,oneTimePayRoll,EmployeeSelective,ReversePayroll,specificPayroll,payrollbyCompany,changeStatuspayroll,
-				taxableByCompany,taxableSecondaryPath,taxabledefaultPath,GTNReport};
+				taxableByCompany,taxableSecondaryPath,taxabledefaultPath,GTNReport,
+				ApplicableLawSecondaryPath,ApplicableLawByCompany,ApplicablelawdefaultPath};

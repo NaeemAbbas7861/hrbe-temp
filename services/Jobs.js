@@ -126,7 +126,7 @@ const UpdateJobs = async (req, res) => {
 const DeleteJobs= async (req, res) => {
 	try {
 		console.log(res);
-		var query = "delete from Jobs where Id='"+req.params.Id+"' ;";
+		var query = "delete from Jobs where Id in (" + req.params.Id + ")  ;";
 		const pool = await poolPromise
 		const result = await pool.request()
 			.query(query, function (err, profileset) {

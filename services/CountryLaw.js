@@ -24,6 +24,28 @@ const GetAllCountryLaw = async (req, res) => {
 	}
 }
 
+const GetCountryLawByCountry = async (req, res) => {
+	try {
+		var query = "select law.* from [dbo].[CountryLaws] law inner join [dbo].[Company] company on company.CountryCode=law.CountryCode where company.Id='"+req.params.CompanyId+"'";
+		const pool = await poolPromise
+		const result = await pool.request()
+			.query(query, function (err, profileset) {
+				if (err) {
+					console.log(err)
+				}
+				else {
+					var response = {data:profileset.recordset};
+					res.send(response);
+					return ;
+				}
+			})
+	} catch (err) {
+		res.status(500)
+		res.send(message.error)
+		return "error";
+	}
+}
+
 const GetCountryLawById = async (req, res) => {
 	try {
 		var query = "select * from CountryLaws where Id='"+req.params.Id+"' ;";
@@ -114,4 +136,4 @@ const DeleteCountryLaw = async (req, res) => {
 		return "error";
 	}
 }
-module.exports = { GetAllCountryLaw,GetCountryLawById,InsertCountryLaw,UpdateCountryLaw,DeleteCountryLaw};
+module.exports = { GetAllCountryLaw,GetCountryLawById,InsertCountryLaw,UpdateCountryLaw,DeleteCountryLaw,GetCountryLawByCountry};
