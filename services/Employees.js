@@ -236,6 +236,8 @@ const InsertEmployee = async (req, res) => {
 			.input("ProbationEndDate", sql.VarChar(20), req.body.ProbationEndDate)
 			.input("SalaryStatus", sql.BIGINT, req.body.SalaryStatus)
 			.input("ApplicableLaws", sql.NVarChar(4000), req.body.ApplicableLaws)
+			.input("TaxationApplicable", sql.Int, req.body.TaxationApplicable)
+			.input("SocialSecurityApplicable", sql.Int, req.body.SocialSecurityApplicable)
 			.execute("[dbo].[InsertEmployee]").then(function (recordSet) {
 				res.status(200).json({ status: "Success" });
 				//  return ;
@@ -274,7 +276,7 @@ const UpdateEmployee = async (req, res) => {
 			.input("HiringReason", sql.VarChar(500), req.body.HiringReason)
 			.input("IBAN", sql.BIGINT, req.body.IBAN)
 			.input("InsuranceId", sql.VarChar(500), req.body.InsuranceId)
-			.input("IsPrimary", sql.BIGINT, req.body.IsPrimary)
+			.input("IsPrimary", sql.VarChar(50), req.body.IsPrimary)
 			.input("LastName", sql.VarChar(500), req.body.LastName)
 			.input("MaritalStatus", sql.BIGINT, req.body.MaritalStatus)
 			.input("PartTimePercentage", sql.Decimal(18, 2), req.body.PartTimePercentage)
@@ -288,6 +290,8 @@ const UpdateEmployee = async (req, res) => {
 			.input("SalaryStatus", sql.BIGINT, req.body.SalaryStatus)
 			.input("ApplicableLaws", sql.NVarChar(4000), req.body.ApplicableLaws)
 			.input("OneTimePayRollDetail", sql.NVARCHAR(4000), req.body.OneTimePayRollDetail)
+			.input("TaxationApplicable", sql.Bit, req.body.TaxationApplicable)
+			.input("SocialSecurityApplicable", sql.Bit, req.body.SocialSecurityApplicable)
 			.input("type", sql.VarChar(100), req.body.type)
 			.execute("[dbo].[UpdateEmployee]").then(function (recordSet) {
 				res.status(200).json({ status: "Success" });
