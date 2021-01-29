@@ -155,7 +155,7 @@ const reversePayroll=async (req,res)=>{
 		console.log(req.body)
 		var query = 
 		`
-		delete from [myuser].[SalaryPayRoll] where GroupName ='`+req.body.GroupName+`' and CompanyId='`+req.body.Company+`'
+		delete from [myuser].[SalaryPayRoll] where PayGroup ='`+req.body.GroupName+`' and CompanyId='`+req.body.Company+`'
 		update [dbo].[Employeeovertime] set GroupName=NULL where GroupName ='`+req.body.GroupName+`' and CompanyId='`+req.body.Company+`'
 		`;
 
