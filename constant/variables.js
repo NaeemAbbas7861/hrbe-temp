@@ -103,11 +103,12 @@ const PaySlipDefaultPath='/payslip';
 const payrollbyCompany=PaySlipDefaultPath +"/ByCompany/:CompanyId";
 //#endregion
 //#region Reports
-const EmployeeReport='/Report/Employee';
+const EmployeeReport='/Report/Employee/:Id';
 const EmployeepayrollReport='/Report/PayRoll';
 const EmployeeVarrianceReport="/Report/Varriance"
 const EmployeeVarrianceindvReport="/Report/indevVarriance";
 const GTNReport="/Report/GTN";
+const downloadPath="/Download/:Path";
 //#endregion 
 //#region BulkUpload
 const BulkUploadPath='/bulkupload';
@@ -162,4 +163,4 @@ module.exports={userloginPath,userdefaultPath,message,defaultPath,BankSecondaryP
 				TerminationPrimaryPath,TerminationSecondaryPath,TerminationByCompany,
 				EmployeeAdvanceDetail,oneTimePayRoll,EmployeeSelective,ReversePayroll,specificPayroll,payrollbyCompany,changeStatuspayroll,
 				taxableByCompany,taxableSecondaryPath,taxabledefaultPath,GTNReport,
-				ApplicableLawSecondaryPath,ApplicableLawByCompany,ApplicablelawdefaultPath};
+				ApplicableLawSecondaryPath,ApplicableLawByCompany,ApplicablelawdefaultPath,downloadPath};
