@@ -10,7 +10,7 @@ const GetEmployeesSelective = async (req, res) => {
 		Id as value , concat(FirstName,' ', LastName) as label   
 		
 		from 
-		[dbo].[Employees] where CompanyId = '`+ req.params.CompanyId + `' ;`;
+		[dbo].[Employees] where CompanyId = '`+ req.params.CompanyId + `' AND NOT CurrentEmployeeStatus=30 ;`;
 		const pool = await poolPromise
 		const result = await pool.request()
 			.query(query, function (err, profileset) {
@@ -21,7 +21,6 @@ const GetEmployeesSelective = async (req, res) => {
 				}
 				else {
 					var response = profileset.recordset;
-					response.push({ "value": 'All', 'label': 'All' });
 					res.send(response);
 					return;
 				}
@@ -195,7 +194,6 @@ const GetEmployeeById = async (req, res) => {
 }
 
 const InsertEmployee = async (req, res) => {
-	console.log(req.body, req.body.Title);
 	try {
 
 		const pool = await poolPromise
@@ -222,7 +220,7 @@ const InsertEmployee = async (req, res) => {
 			.input("HiringReason", sql.VarChar(500), req.body.HiringReason)
 			.input("IBAN", sql.VarChar(500), req.body.IBAN)
 			.input("InsuranceId", sql.VarChar(500), req.body.InsuranceId)
-			.input("IsPrimary", sql.BIGINT, req.body.IsPrimary)
+			.input("IsPrimary", sql.VarChar(50), req.body.IsPrimary)
 			.input("LastName", sql.VarChar(500), req.body.LastName)
 			.input("MaritalStatus", sql.BIGINT, req.body.MaritalStatus)
 			.input("PartTimePercentage", sql.Decimal(18, 2), req.body.PartTimePercentage)
