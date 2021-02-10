@@ -21,7 +21,8 @@ const EmployeeDetail=(obj)=>{
 		PeriodicPayElements:obj[1],
 		OnetimeElement:obj[2],
 		EmployeeBankAccount:obj[3],
-		Payments:obj[4]
+		Payments:obj[4],
+		CurrentEmployeeStatus:obj[0][0].CurrentEmployeeStatus
 	}
 		return object;
 }
