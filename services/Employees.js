@@ -272,7 +272,7 @@ const UpdateEmployee = async (req, res) => {
 			.input("GradeId", sql.BIGINT, req.body.GradeId)
 			.input("HireDate", sql.VarChar(20), req.body.HireDate)
 			.input("HiringReason", sql.VarChar(500), req.body.HiringReason)
-			.input("IBAN", sql.BIGINT, req.body.IBAN)
+			.input("IBAN", sql.VarChar(500), req.body.IBAN)
 			.input("InsuranceId", sql.VarChar(500), req.body.InsuranceId)
 			.input("IsPrimary", sql.VarChar(50), req.body.IsPrimary)
 			.input("LastName", sql.VarChar(500), req.body.LastName)
