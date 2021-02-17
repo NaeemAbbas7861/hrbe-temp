@@ -83,8 +83,8 @@ const InsertCountryLaw = async (req, res) => {
 		Declare @Id BIGINT=0;
 		set @Id=@@identity;
 
-		Insert into LawRanges(MaxSalary,MinSalary,Discount,Percentage,LawId)
-		select maxSalary,minSalary,Discount,Percentage,@Id from OPENJSON('`+ req.body.Ranges + `') with(minSalary money,maxSalary money,Discount int,Percentage INT);
+		Insert into LawRanges(MaxSalary,MinSalary,Discount,Percentage,LawId,TaxAmount)
+		select maxSalary,minSalary,Discount,Percentage,@Id,TaxAmount from OPENJSON('`+ req.body.Ranges + `') with(minSalary money,maxSalary money,Discount int,Percentage INT,TaxAmount money);
 
 
 		`;
@@ -121,16 +121,18 @@ const UpdateCountryLaw = async (req, res) => {
 		 DeclarationMode = '` + req.body.DeclarationMode + `'  where Id = '` + req.params.Id + `'  ;
 		 
 		 delete from LawRanges where LawId ='`+req.params.Id+`'
-
-		 Insert into LawRanges(MaxSalary,MinSalary,Discount,Percentage,LawId)
-		 select maxSalary,minSalary,Discount,Percentage,'`+req.params.Id+`' from OPENJSON('`+ req.body.Ranges + `') with(minSalary money,maxSalary money,Discount int,Percentage INT);
-		 `;
+		 
+		 Insert into LawRanges(MaxSalary,MinSalary,Discount,Percentage,LawId,TaxAmount)
+		 select maxSalary,minSalary,Discount,Percentage,'`+req.params.Id+`',TaxAmount from OPENJSON('`+ req.body.Ranges + `') with(minSalary money,maxSalary money,Discount int,Percentage INT,TaxAmount money);
+  `;
 		 console.log(query)
 		const pool = await poolPromise
 		const result = await pool.request()
 			.query(query, function (err, profileset) {
 				if (err) {
-					console.log(err)
+					res.status(500)
+					res.send(message.error)
+					return "error";
 				}
 				else {
 					var response = profileset.recordset;
