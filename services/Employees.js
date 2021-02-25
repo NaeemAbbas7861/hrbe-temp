@@ -331,6 +331,7 @@ const GetEmployeeAdvanceDetail = async (req, res) => {
 
 	try {
 		var query = `select  
+		emp.EmployeeCode,
 		emp.CurrentEmployeeStatus,
 		emp.InsuranceId, 
 		emp.TaxationId,

@@ -1,6 +1,7 @@
 const EmployeeDetail=(obj)=>{
 	
 	var object=  {
+		EmployeeCode:obj[0][0].EmployeeCode,
 		InsuranceId:obj[0][0].InsuranceId,
 		TaxationId:obj[0][0].TaxationId,
 		Cnic:obj[0][0].Cnic,

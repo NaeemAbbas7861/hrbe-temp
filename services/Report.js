@@ -482,7 +482,9 @@ const  GetGTNReport = async (req, res) => {
 					worksheet.cell(2,2).string(response[0].CompanyName);
 					worksheet.cell(3,1).string('Entity Id');
 					worksheet.cell(3,2).string(response[0].Code);
-
+					worksheet.cell(4,1).string('Pay Cycle');
+					worksheet.cell(4,2).string(response[0].PayCycle);
+					
 					var Objects=Object.keys(response[0]);
 					for(var x=5;x<Objects.length;x++){
 						worksheet.cell(9,x-4).string(Objects[x]).style(style);
