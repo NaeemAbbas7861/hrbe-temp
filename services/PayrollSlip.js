@@ -132,7 +132,7 @@ const GetPayRollSlipByCompany = async (req, res) => {
         from [myuser].[TaxationDetail] tax
 		INNER JOIN 
 		[dbo].[CountryLaws] LAW ON LAW.Id =tax.LawId
-        where tax.GroupCode = payroll.PayGroup
+        where tax.GroupCode = payroll.PayGroup AND tax.EmployeeId=payroll.[EmployeeId]
         for xml path('')
     ),1,1,'')
 )  as Law ,
