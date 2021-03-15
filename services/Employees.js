@@ -21,6 +21,7 @@ const GetEmployeesSelective = async (req, res) => {
 				}
 				else {
 					var response = profileset.recordset;
+					response.push({'value':'All','label':'All'})
 					res.send(response);
 					return;
 				}
