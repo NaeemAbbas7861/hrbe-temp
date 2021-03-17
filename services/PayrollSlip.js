@@ -128,7 +128,7 @@ const GetPayRollSlipByCompany = async (req, res) => {
 		select payroll.[Id], payroll.[EmployeeId], [payables], [taxdeduction],
 (
 	SELECT    stuff((
-        select ',' + CONCAT(LAW.Detail,'#',tax.amount,','+'Employee Percentage','#',APP.EmployeeCut,',','Company Percentage','#',APP.CompanyCut)
+        select ',' + CONCAT(LAW.Detail,'#',tax.amount)
         from [myuser].[TaxationDetail] tax
 		INNER JOIN 
 		[dbo].[CountryLaws] LAW ON LAW.Id =tax.LawId
