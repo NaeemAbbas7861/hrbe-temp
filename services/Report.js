@@ -77,7 +77,8 @@ const GetEmployeeReport = async (req, res) => {
 					var style = workbook.createStyle({
 						font: {
 							color: '#000000',
-							size: 14
+							size: 14,
+							bold:true
 						},
 						fill:{
 							type: 'pattern',
@@ -110,6 +111,42 @@ const GetEmployeeReport = async (req, res) => {
 						
 					});
 					
+					var style1 = workbook.createStyle({
+						font: {
+							color: '#000000',
+							size: 12
+						},
+						fill:{
+							type: 'pattern',
+							patternType: 'solid',
+							bgColor: '#DAEEF3',
+							fgColor: '#DAEEF3'
+						},
+						alignment: { 
+							shrinkToFit: true, 
+							wrapText: true
+						},
+						border: { // §18.8.4 border (Border)
+							left: {
+								style: "thin", //§18.18.3 ST_BorderStyle (Border Line Styles) ['none', 'thin', 'medium', 'dashed', 'dotted', 'thick', 'double', 'hair', 'mediumDashed', 'dashDot', 'mediumDashDot', 'dashDotDot', 'mediumDashDotDot', 'slantDashDot']
+								color: "#080808" // HTML style hex value
+							},
+							right: {
+								style: "thin",
+								color: "#080808"
+							},
+							top: {
+								style: "thin",
+								color: "#080808"
+							},
+							bottom: {
+								style: "thin",
+								color: "#080808"
+							}
+						}
+						
+					});
+
 					var datetime = Date.now();
 					var Path='public/'+datetime+'.xlsx';
 				
@@ -141,18 +178,18 @@ const GetEmployeeReport = async (req, res) => {
 					}
 					
 					worksheet.cell(1,1).string('Country Code').style(style);
-					worksheet.cell(1,2).string(response.data[0].CountryCode).style(style);
+					worksheet.cell(1,2).string(response.data[0].CountryCode).style(style1);
 					worksheet.cell(2,1).string('Company Name').style(style);
-					worksheet.cell(2,2).string(response.data[0].CompanyName).style(style);
+					worksheet.cell(2,2).string(response.data[0].CompanyName).style(style1);
 					worksheet.cell(3,1).string('Entity Id').style(style);
-					worksheet.cell(3,2).string(response.data[0].CompanyCode).style(style);
+					worksheet.cell(3,2).string(response.data[0].CompanyCode).style(style1);
 					worksheet.cell(4,1).string('Pay Cycle').style(style);
-					worksheet.cell(4,2).string(response.data[0].PayCycle).style(style);
+					worksheet.cell(4,2).string(response.data[0].PayCycle).style(style1);
 					worksheet.cell(6,1).string('Break Down by Employee').style(style);
 					worksheet.cell(8,1).string('Currency').style(style);
 					worksheet.cell(8,2).string('Amount').style(style);
-					worksheet.cell(9,1).string(response.data[0].CompanyCurrency).style(style);
-					worksheet.cell(9,2).number(TOTAL).style(style);
+					worksheet.cell(9,1).string(response.data[0].CompanyCurrency).style(style1);
+					worksheet.cell(9,2).number(TOTAL).style(style1);
 
 
 					worksheet.cell(11,1).string('Employee ID').style(style);
@@ -166,15 +203,15 @@ const GetEmployeeReport = async (req, res) => {
 					worksheet.cell(11,9).string('Routing/Sort Code').style(style);
 					console.log(response.data);
 					for(var i=0;i<response.data.length;i++){
-						worksheet.cell(i+12,1).string(response.data[i].EmployeeCode).style(style);
-						worksheet.cell(i+12,2).string(response.data[i].EmployeeName).style(style);
-						worksheet.cell(i+12,3).string(response.data[i].HireDate).style(style);
-						worksheet.cell(i+12,4).string(response.data[i].IBAN).style(style);
-						worksheet.cell(i+12,5).number(response.data[i].NetSalary!=undefined && response.data[i].NetSalary!=null && response.data[i].NetSalary!=""?response.data[i].NetSalary:0).style(style);
-						worksheet.cell(i+12,6).string(response.data[i].Currency).style(style);
-						worksheet.cell(i+12,7).string(response.data[i].BankName).style(style);
-						worksheet.cell(i+12,8).string(response.data[i].SwiftCode).style(style);
-						worksheet.cell(i+12,9).string(response.data[i].RouteCode!=undefined && response.data[i].RouteCode!=null && response.data[i].RouteCode!=""? response.data[i].RouteCode.toString():"").style(style);
+						worksheet.cell(i+12,1).string(response.data[i].EmployeeCode).style(style1);
+						worksheet.cell(i+12,2).string(response.data[i].EmployeeName).style(style1);
+						worksheet.cell(i+12,3).string(response.data[i].HireDate).style(style1);
+						worksheet.cell(i+12,4).string(response.data[i].IBAN).style(style1);
+						worksheet.cell(i+12,5).number(response.data[i].NetSalary!=undefined && response.data[i].NetSalary!=null && response.data[i].NetSalary!=""?response.data[i].NetSalary:0).style(style1);
+						worksheet.cell(i+12,6).string(response.data[i].Currency).style(style1);
+						worksheet.cell(i+12,7).string(response.data[i].BankName).style(style1);
+						worksheet.cell(i+12,8).string(response.data[i].SwiftCode).style(style1);
+						worksheet.cell(i+12,9).string(response.data[i].RouteCode!=undefined && response.data[i].RouteCode!=null && response.data[i].RouteCode!=""? response.data[i].RouteCode.toString():"").style(style1);
 					}
 					workbook.write(Path);
 					/***********************************/
@@ -281,7 +318,8 @@ console.log(query)
 					var style = workbook.createStyle({
 						font: {
 							color: '#000000',
-							size: 14
+							size: 14,
+							bold:true
 						},
 						fill:{
 							type: 'pattern',
@@ -314,6 +352,41 @@ console.log(query)
 						
 					});
 					
+					var style1 = workbook.createStyle({
+						font: {
+							color: '#000000',
+							size: 12
+						},
+						fill:{
+							type: 'pattern',
+							patternType: 'solid',
+							bgColor: '#DAEEF3',
+							fgColor: '#DAEEF3'
+						},
+						alignment: { 
+							shrinkToFit: true, 
+							wrapText: true
+						},
+						border: { // §18.8.4 border (Border)
+							left: {
+								style: "thin", //§18.18.3 ST_BorderStyle (Border Line Styles) ['none', 'thin', 'medium', 'dashed', 'dotted', 'thick', 'double', 'hair', 'mediumDashed', 'dashDot', 'mediumDashDot', 'dashDotDot', 'mediumDashDotDot', 'slantDashDot']
+								color: "#080808" // HTML style hex value
+							},
+							right: {
+								style: "thin",
+								color: "#080808"
+							},
+							top: {
+								style: "thin",
+								color: "#080808"
+							},
+							bottom: {
+								style: "thin",
+								color: "#080808"
+							}
+						}
+						
+					});
 					
 					var datetime = Date.now();
 					var Path='public/'+datetime+'.xlsx';
@@ -343,8 +416,8 @@ console.log(query)
 					worksheet.cell(1,1).string('Company').style(style);
 					worksheet.cell(2,1).string('PayCycle').style(style);
 					
-					worksheet.cell(1,2).string(response[0].company.toString()).style(style);
-					worksheet.cell(2,2).string(response[0].FirstDate+'/'+response[0].LastDate).style(style);
+					worksheet.cell(1,2).string(response[0].company.toString()).style(style1);
+					worksheet.cell(2,2).string(response[0].FirstDate+'/'+response[0].LastDate).style(style1);
 					
 					worksheet.cell(4,1).string('Group Name').style(style);
 					worksheet.cell(4,2).string('Current Month').style(style);
@@ -352,11 +425,11 @@ console.log(query)
 					worksheet.cell(4,4).string('Varrience').style(style);
 					worksheet.cell(4,5).string('%').style(style);
 					for(var i=0;i<response.length;i++){
-						worksheet.cell(i+5,1).string(response[i].GroupName.toString()).style(style);
-						worksheet.cell(i+5,2).number(response[i].CURRENTMONTH).style(style);
-						worksheet.cell(i+5,3).number(response[i].LASTMONTH).style(style);
-						worksheet.cell(i+5,4).number(response[i].Varrience).style(style);
-						worksheet.cell(i+5,5).number((response[i].CURRENTMONTH==0 && response[i].LASTMONTH==0?0:response[i].LASTMONTH==0?100:response[i].CURRENTMONTH==0?-100: (response[i].Varrience/response[i].LASTMONTH)*100)).style(style);
+						worksheet.cell(i+5,1).string(response[i].GroupName.toString()).style(style1);
+						worksheet.cell(i+5,2).number(response[i].CURRENTMONTH).style(style1);
+						worksheet.cell(i+5,3).number(response[i].LASTMONTH).style(style1);
+						worksheet.cell(i+5,4).number(response[i].Varrience).style(style1);
+						worksheet.cell(i+5,5).number((response[i].CURRENTMONTH==0 && response[i].LASTMONTH==0?0:response[i].LASTMONTH==0?100:response[i].CURRENTMONTH==0?-100: (response[i].Varrience/response[i].LASTMONTH)*100)).style(style1);
 					}
 					workbook.write(Path);
 
@@ -434,7 +507,45 @@ const getIndvVarriancereport = async (req, res) => {
 					var style = workbook.createStyle({
 						font: {
 							color: '#000000',
-							size: 14
+							size: 14,
+							bold: true
+						},
+						fill:{
+							type: 'pattern',
+							patternType: 'solid',
+							bgColor: '#DAEEF3',
+							fgColor: '#DAEEF3'
+						},
+						alignment: { 
+							shrinkToFit: true, 
+							wrapText: true
+						},
+						border: { // §18.8.4 border (Border)
+							left: {
+								style: "thin", //§18.18.3 ST_BorderStyle (Border Line Styles) ['none', 'thin', 'medium', 'dashed', 'dotted', 'thick', 'double', 'hair', 'mediumDashed', 'dashDot', 'mediumDashDot', 'dashDotDot', 'mediumDashDotDot', 'slantDashDot']
+								color: "#080808" // HTML style hex value
+							},
+							right: {
+								style: "thin",
+								color: "#080808"
+							},
+							top: {
+								style: "thin",
+								color: "#080808"
+							},
+							bottom: {
+								style: "thin",
+								color: "#080808"
+							}
+						}
+						
+					});
+
+							
+					var style1 = workbook.createStyle({
+						font: {
+							color: '#000000',
+							size: 12
 						},
 						fill:{
 							type: 'pattern',
@@ -493,8 +604,8 @@ const getIndvVarriancereport = async (req, res) => {
 
 					worksheet.cell(1,1).string('Company').style(style);
 					worksheet.cell(2,1).string('PayCycle').style(style);
-					worksheet.cell(1,2).string(response[0].company.toString()).style(style);
-					worksheet.cell(2,2).string(response[0].FirstDate+'/'+response[0].LastDate).style(style);
+					worksheet.cell(1,2).string(response[0].company.toString()).style(style1);
+					worksheet.cell(2,2).string(response[0].FirstDate+'/'+response[0].LastDate).style(style1);
 
 					worksheet.cell(4,1).string('Group Name').style(style);
 					worksheet.cell(4,2).string('Employee Name').style(style);
@@ -503,12 +614,12 @@ const getIndvVarriancereport = async (req, res) => {
 					worksheet.cell(4,5).string('Varrience').style(style);
 					worksheet.cell(4,6).string('%').style(style);
 					for(var i=0;i<response.length;i++){
-						worksheet.cell(i+5,1).string(response[i].GroupName.toString()).style(style);
-						worksheet.cell(i+5,2).string(response[i].Name).style(style);
-						worksheet.cell(i+5,3).number(response[i].CURRENTMONTH).style(style);
-						worksheet.cell(i+5,4).number(response[i].LASTMONTH).style(style);
-						worksheet.cell(i+5,5).number(response[i].Varrience).style(style);
-						worksheet.cell(i+5,6).number((response[i].CURRENTMONTH==0 && response[i].LASTMONTH==0?0:response[i].LASTMONTH==0?100:response[i].CURRENTMONTH==0?-100: (response[i].Varrience/response[i].LASTMONTH)*100)).style(style);
+						worksheet.cell(i+5,1).string(response[i].GroupName.toString()).style(style1);
+						worksheet.cell(i+5,2).string(response[i].Name).style(style1);
+						worksheet.cell(i+5,3).number(response[i].CURRENTMONTH).style(style1);
+						worksheet.cell(i+5,4).number(response[i].LASTMONTH).style(style1);
+						worksheet.cell(i+5,5).number(response[i].Varrience).style(style1);
+						worksheet.cell(i+5,6).number((response[i].CURRENTMONTH==0 && response[i].LASTMONTH==0?0:response[i].LASTMONTH==0?100:response[i].CURRENTMONTH==0?-100: (response[i].Varrience/response[i].LASTMONTH)*100)).style(style1);
 					}
 					workbook.write(Path);
 
@@ -578,19 +689,55 @@ const  GetGTNReport = async (req, res) => {
 						}
 					});
 					
+					var style1 = workbook.createStyle({
+						font: {
+							color: '#000000',
+							size: 12
+						},
+						fill:{
+							type: 'pattern',
+							patternType: 'solid',
+							bgColor: '#DAEEF3',
+							fgColor: '#DAEEF3'
+						},
+						alignment: { 
+							shrinkToFit: true, 
+							wrapText: true
+						},
+						border: { // §18.8.4 border (Border)
+							left: {
+								style: "thin", //§18.18.3 ST_BorderStyle (Border Line Styles) ['none', 'thin', 'medium', 'dashed', 'dotted', 'thick', 'double', 'hair', 'mediumDashed', 'dashDot', 'mediumDashDot', 'dashDotDot', 'mediumDashDotDot', 'slantDashDot']
+								color: "#080808" // HTML style hex value
+							},
+							right: {
+								style: "thin",
+								color: "#080808"
+							},
+							top: {
+								style: "thin",
+								color: "#080808"
+							},
+							bottom: {
+								style: "thin",
+								color: "#080808"
+							}
+						}
+						
+					});
+
 					var datetime = Date.now();
 					var Path='public/'+datetime+'.xlsx';
 					worksheet.cell(1,1).string('Country Code').style(style);
-					worksheet.cell(1,2).string(response[0].CountryCode).style(style);
+					worksheet.cell(1,2).string(response[0].CountryCode).style(style1);
 					worksheet.cell(2,1).string('Company Name').style(style);
-					worksheet.cell(2,2).string(response[0].CompanyName).style(style);
+					worksheet.cell(2,2).string(response[0].CompanyName).style(style1);
 					worksheet.cell(3,1).string('Entity Id').style(style);
-					worksheet.cell(3,2).string(response[0].Code).style(style);
+					worksheet.cell(3,2).string(response[0].Code).style(style1);
 					worksheet.cell(4,1).string('Pay Cycle').style(style);
-					worksheet.cell(4,2).string(response[0].PayCycle).style(style);
+					worksheet.cell(4,2).string(response[0].PayCycle).style(style1);
 					
 					var Objects=Object.keys(response[0]);
-					for(var x=5;x<Objects.length;x++){
+					for(var x=5;x<Objects.length;x++) {
 						worksheet.cell(9,x-4).string(Objects[x]).style(style);
 					}
 					worksheet.column(1).setWidth(30);
@@ -618,13 +765,12 @@ const  GetGTNReport = async (req, res) => {
 						var OBJ={};
 						for(var z=5;z<Objects.length;z++){
 							console.log(response[i][Objects[x]]);
-							worksheet.cell(i+10,z-4).string(Number.isInteger(response[i][Objects[z]])?response[i][Objects[z]].toString():response[i][Objects[z]]).style(style);
+							worksheet.cell(i+10,z-4).string(Number.isInteger(response[i][Objects[z]])?response[i][Objects[z]].toString():response[i][Objects[z]]).style(style1);
 							OBJ[z]=Number.isInteger(response[i][Objects[z]])?response[i][Objects[z]]:0;
 	
 						}
 						OUTPUT.push(OBJ);
 					}
-					console.log(OUTPUT)
 					const result = OUTPUT.reduce((sums, obj) => Object.keys(obj).reduce((s, k) => {    
 						k === 'id' || (s[k] = (s[k] || 0) + +obj[k]);
 						
@@ -634,7 +780,8 @@ const  GetGTNReport = async (req, res) => {
 					var _style = workbook.createStyle({
 						font: {
 							color: '#000000',
-							size: 14
+							size: 14,
+							bold:true
 						},
 					  });
 
