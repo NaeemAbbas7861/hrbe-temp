@@ -109,6 +109,8 @@ const EmployeeVarrianceReport="/Report/Varriance"
 const EmployeeVarrianceindvReport="/Report/indevVarriance";
 const GTNReport="/Report/GTN";
 const downloadPath="/Download/:Path";
+const GLReport="/Report/GL";
+const PaySlip="/Report/PaySlip/:Id";
 //#endregion 
 //#region BulkUpload
 const BulkUploadPath='/bulkupload';
@@ -163,4 +165,4 @@ module.exports={userloginPath,userdefaultPath,message,defaultPath,BankSecondaryP
 				TerminationPrimaryPath,TerminationSecondaryPath,TerminationByCompany,
 				EmployeeAdvanceDetail,oneTimePayRoll,EmployeeSelective,ReversePayroll,specificPayroll,payrollbyCompany,changeStatuspayroll,
 				taxableByCompany,taxableSecondaryPath,taxabledefaultPath,GTNReport,
-				ApplicableLawSecondaryPath,ApplicableLawByCompany,ApplicablelawdefaultPath,downloadPath};
+				ApplicableLawSecondaryPath,ApplicableLawByCompany,ApplicablelawdefaultPath,downloadPath,GLReport,PaySlip};
