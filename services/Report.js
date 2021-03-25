@@ -261,6 +261,8 @@ WHERE Salary.Id='`+req.params.Id+`'
 						  })
 					// });
 
+  res.status(200)
+					res.send("Good Job")
 				}
 			});
 		}catch (err) {
