@@ -255,6 +255,9 @@ WHERE Salary.Id='`+req.params.Id+`'
 							attachments: [{'filename': 'PaySlip.pdf',  path:"./../PaySlip.pdf"}]
 						  }).catch(e=>{
 							  console.log(e);
+							  res.status(500)
+					res.send(e)
+					return "error";
 						  })
 					// });
 
