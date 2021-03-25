@@ -124,26 +124,29 @@ doc.rect(5, 410, 600, 30).fillAndStroke('#ddd', '#000');
 doc.fill('#000').stroke();
 doc.fontSize(10);
 doc.text('Entitlements', 8, 430)
-doc.text('Amount', 95, 430)
+doc.text('Amount', 150, 430)
 doc.text('Currency', 190, 430)
 doc.text('Deductions', 280, 430)
-doc.text('Amount', 375, 430)
+doc.text('Amount', 430, 430)
 doc.text('Currency', 470, 430)
+
+doc.fontSize(10);
+
 
 for(var i=0;i<EntitlementList.length;i++){
 	// doc.rect(5, 410, 600, 30).fillAndStroke('#FFFFFF', '#000');
 	// doc.fill('#000').stroke();
-	doc.fontSize(10);
-	doc.text(resp[i].Description, 8, 440+((i+1)*30))
-	doc.text(resp[i].amount, 95,  440+((i+1)*30))
-	doc.text(resp[i].AccCurrency, 190, 440+((i+1)*30))
+
+	doc.text(EntitlementList[i].Description, 8, 440+((i+1)*30))
+	doc.text(EntitlementList[i].amount, 150,  440+((i+1)*30))
+	doc.text(EntitlementList[i].AccCurrency, 190, 440+((i+1)*30))
 
 }
 
 for(var i=0;i<DeductionList.length;i++){
-	doc.text(resp[i].Description, 280,  440+((i+1)*30))
-	doc.text(resp[i].amount, 375, 440+((i+1)*30))
-	doc.text(resp[i].AccCurrency, 470,  440+((i+1)*30))
+	doc.text(DeductionList[i].Description, 280,  440+((i+1)*30))
+	doc.text(DeductionList[i].amount, 430, 440+((i+1)*30))
+	doc.text(DeductionList[i].AccCurrency, 470,  440+((i+1)*30))
 }
 
 
@@ -233,27 +236,27 @@ WHERE Salary.Id='`+req.params.Id+`'
 				
 
 					let transporter = nodemailer.createTransport({
-						host: "hrsolutionhouse.com",
-						port: 587,
+						host: "webmail.hrsolutionhouse.com",
+						port: 25,
 						secure: true, // true for 465, false for other ports
 						auth: {
-							user: 'employee.payslips@hrsolutionhouse.com', 
-							pass: 'n7xjAw4r&A4dNdjz'
+							user:'employee.payslips@hrsolutionhouse.com', 
+							pass:'n7xjAw4r&A4dNdjz'
 						},
 					  });
 
 				
-					fs.readFile("./../PaySlip.pdf",  function (err, data) {
+					// fs.readFile("./PaySlip.pdf",  function (err, data) {
 						  transporter.sendMail({
-							from: 'employee.payslips@hrsolutionhouse.com',
+							from:'employee.payslips@hrsolutionhouse.com',
 							to: "naeemabbasa25@gmail.com",
 							subject: 'Payslip!',
 							text: 'PaySlip of Month',
-							// attachments: [{'filename': 'PaySlip.pdf', 'content': data}]
+							attachments: [{'filename': 'PaySlip.pdf',  path:"./../PaySlip.pdf"}]
 						  }).catch(e=>{
 							  console.log(e);
 						  })
-					});
+					// });
 
 				}
 			});
