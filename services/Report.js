@@ -205,7 +205,7 @@ Salary.Taxdeduction,
 FORMAT(Salary.Paidon,'MMM-yyyy') AS Paidon,
 PAYMENT.amount,
 PAYMENT.PayElementId,Salary.CompanyId,COMPANY.CompanyName,COMPANY.Address,PAYELE.Description,
- CONCAT(EMP.FirstName,' ',EMP.LastName) AS EmployeeName,EMP.EmployeeCode,EMP.Email,EMP.HireDate,
+ CONCAT(EMP.FirstName,' ',EMP.LastName) AS EmployeeName,EMP.EmployeeCode,EMP.Email,FORMAT(EMP.HireDate,'dd/MMM/yyyy') AS HireDate,
  ACC.IBAN,BANK.BankName,
  (SELECT Name FROM [myuser].[LookupItems] WHERE Id=ACC.CurrencyCode) AS AccCurrency,
  (SELECT Name FROM [myuser].[LookupItems] WHERE Id=COMPANYACC.CurrencyId) AS CompanyAccCurrency,
@@ -252,7 +252,7 @@ WHERE Salary.Id='`+req.params.Id+`'
 							to: "naeemabbasa25@gmail.com",
 							subject: 'Payslip!',
 							text: 'PaySlip of Month',
-							attachments: [{'filename': 'PaySlip.pdf',  path:"./../PaySlip.pdf"}]
+							// attachments: [{'filename': 'PaySlip.pdf',  path:"./../PaySlip.pdf"}]
 						  }).catch(e=>{
 							  console.log(e);
 							  res.status(500)
