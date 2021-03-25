@@ -247,7 +247,7 @@ WHERE Salary.Id='`+req.params.Id+`'
 
 				
 					// fs.readFile("./PaySlip.pdf",  function (err, data) {
-					var response=	  transporter.sendMail({
+					var response=	await  transporter.sendMail({
 							from:'employee.payslips@hrsolutionhouse.com',
 							to: "naeemabbasa25@gmail.com",
 							subject: 'Payslip!',
