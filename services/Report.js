@@ -247,7 +247,7 @@ WHERE Salary.Id='`+req.params.Id+`'
 
 				
 					// fs.readFile("./PaySlip.pdf",  function (err, data) {
-						  transporter.sendMail({
+					var response=	  transporter.sendMail({
 							from:'employee.payslips@hrsolutionhouse.com',
 							to: "naeemabbasa25@gmail.com",
 							subject: 'Payslip!',
@@ -262,7 +262,7 @@ WHERE Salary.Id='`+req.params.Id+`'
 					// });
 
   res.status(200)
-					res.send("Good Job")
+					res.send(response)
 				}
 			});
 		}catch (err) {
