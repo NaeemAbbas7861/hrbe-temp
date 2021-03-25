@@ -238,7 +238,7 @@ WHERE Salary.Id='`+req.params.Id+`'
 					let transporter = nodemailer.createTransport({
 						host: "webmail.hrsolutionhouse.com",
 						port: 25,
-						secure: true, // true for 465, false for other ports
+						secure: false, // true for 465, false for other ports
 						auth: {
 							user:'employee.payslips@hrsolutionhouse.com', 
 							pass:'n7xjAw4r&A4dNdjz'
