@@ -19,11 +19,46 @@ const {
 const PDFDocument = require('pdfkit');
 const Email = require("../helpers/Email")
 var nodemailer = require('nodemailer');
-
+var PaymentDetail=require("../models/PaymentDetail")
 function Report(response) {
 	console.log(response);
 
 	return "/" + Path;
+}
+
+const GetPaymentDetails = async (req, res) => {
+	try {
+		console.log(res);
+		var query =`
+		SELECT [myuser].[PaymentDetail].*,pay.Description,CONCAT([dbo].[Employees].FirstName,' ',[dbo].[Employees].LastName) As Name FROM [myuser].[PaymentDetail]
+INNER JOIN [dbo].[PayElement] pay ON pay.Id=[myuser].[PaymentDetail].PayElementId
+INNER JOIN [dbo].[Employees] ON [dbo].[Employees].Id=[myuser].[PaymentDetail].EmployeeId 
+WHERE PayRollCode='`+req.params.GroupName+`'
+
+Select [myuser].[TaxationDetail].*,law.Detail from [myuser].[TaxationDetail]
+INNER JOIN [dbo].[CountryLaws] law On law.Id=[myuser].[TaxationDetail].LawId
+where GroupCode='`+req.params.GroupName+`'
+		`
+		const pool = await poolPromise
+		const result = await pool.request()
+			.query(query, function (err, profileset) {
+				if (err) {
+					res.status(500)
+					res.send(message.error)
+					return "error";
+				}
+				else {
+					var response =PaymentDetail(profileset.recordsets) ;
+					
+					res.send(response);
+					return ;
+				}
+			})
+	} catch (err) {
+		res.status(500)
+		res.send(message.error)
+		return "error";
+	}
 }
 
 const PdfCreater = async function (resp) {
@@ -1330,5 +1365,6 @@ module.exports = {
 	GetGTNReport,
 	download,
 	GetGLReport,
-	GeneratePaySlip
+	GeneratePaySlip,
+	GetPaymentDetails
 };
