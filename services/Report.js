@@ -33,11 +33,11 @@ const GetPaymentDetails = async (req, res) => {
 		SELECT [myuser].[PaymentDetail].*,pay.Description,CONCAT([dbo].[Employees].FirstName,' ',[dbo].[Employees].LastName) As Name FROM [myuser].[PaymentDetail]
 INNER JOIN [dbo].[PayElement] pay ON pay.Id=[myuser].[PaymentDetail].PayElementId
 INNER JOIN [dbo].[Employees] ON [dbo].[Employees].Id=[myuser].[PaymentDetail].EmployeeId 
-WHERE PayRollCode='`+req.params.GroupName+`'
+WHERE PayRollCode='`+req.params.GroupName+`' AND [myuser].[PaymentDetail].EmployeeId='`+req.params.EmployeeId+`'
 
 Select [myuser].[TaxationDetail].*,law.Detail from [myuser].[TaxationDetail]
 INNER JOIN [dbo].[CountryLaws] law On law.Id=[myuser].[TaxationDetail].LawId
-where GroupCode='`+req.params.GroupName+`'
+where GroupCode='`+req.params.GroupName+`'AND EmployeeId='`+req.params.EmployeeId+`'
 		`
 		const pool = await poolPromise
 		const result = await pool.request()

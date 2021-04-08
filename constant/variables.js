@@ -111,7 +111,7 @@ const GTNReport="/Report/GTN";
 const downloadPath="/Download/:Path";
 const GLReport="/Report/GL";
 const PaySlip="/Report/PaySlip/:Id";
-const PaymentDetailReport="/Report/PaySlipdetail/:GroupName";
+const PaymentDetailReport="/Report/PaySlipdetail/:GroupName/:EmployeeId";
 //#endregion 
 //#region BulkUpload
 const BulkUploadPath='/bulkupload';
