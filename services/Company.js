@@ -134,8 +134,11 @@ const UpdateCompany = async (req, res) => {
 const DeleteCompany = async (req, res) => {
 	try {
 		console.log(res);
-		var query = `delete from Company where Id in (`+req.params.Id+`) ;
-					 delete from [dbo].[CompanyBankAccounts] where [CompanyId] in (`+req.params.Id+`) `;
+		var query = `
+		delete from [dbo].[CompanyBankAccounts] where [CompanyId] in (`+req.params.Id+`) 
+		delete from Company where Id in (`+req.params.Id+`) ;
+					`;
+					 console.log(query)
 		const pool = await poolPromise
 		const result = await pool.request()
 			.query(query, function (err, profileset) {
