@@ -1323,7 +1323,7 @@ const GetGTNReport = async (req, res) => {
 					var OBJ = {};
 					for (var z = 5; z < Objects.length; z++) {
 			
-						worksheet.cell(i + 10, z - 4).string( response[i][Objects[z]].toString()).style(style1);
+						worksheet.cell(i + 10, z - 4).string(response[i][Objects[z]]==null || response[i][Objects[z]]==undefined?"":response[i][Objects[z]].toString()).style(style1);
 						OBJ[z] = parseFloat(response[i][Objects[z]])?Math.trunc(response[i][Objects[z]]) : 0;
 
 					}
