@@ -65,6 +65,32 @@ where detail.PayRollCode='`+req.params.GroupName+`' AND detail.EmployeeId='`+req
 	}
 }
 
+const GetDatesListbyCompany = async (req, res) => {
+	
+	try {
+		var query = "select distinct format(Paidon,'yyyy-MM') AS DateValue,format(Paidon,'MMM-yyyy') AS Date from [myuser].[SalaryPayRoll] where CompanyId='"+req.params.Id+"';";
+		const pool = await poolPromise
+		const result = await pool.request()
+			.query(query, function (err, profileset) {
+				if (err) {
+					res.status(500)
+					res.send(message.error)
+					return "error";
+				}
+				else {
+					var response = profileset.recordset;
+					res.send(response);
+					return ;
+				}
+			})
+	} catch (err) {
+		res.status(500)
+		res.send(message.error)
+		return "error";
+	}
+}
+
+
 const PdfCreater = async function (resp) {
 	var Entitlement = 0,
 		Deduction = 0;
@@ -1372,5 +1398,6 @@ module.exports = {
 	download,
 	GetGLReport,
 	GeneratePaySlip,
-	GetPaymentDetails
+	GetPaymentDetails,
+	GetDatesListbyCompany
 };
